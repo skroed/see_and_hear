@@ -1,4 +1,10 @@
 # 🎤👀 See & Hear: Multimodal Directional Audio System
+## Demo
+🎥 Short video showing how user looks left / right → audio routes to left mic and how hands can be used to overwrite the head pose see [here](https://www.youtube.com/watch?v=stDaze9vgrw).
+
+📓 System description video see [here](https://www.youtube.com/watch?v=Pk42RZy6LF8).
+
+---
 
 ## Overview
 **See & Hear** is a multimodal prototype that combines **computer vision** and **audio routing** to enable context-aware, directional audio capture.  
@@ -77,11 +83,3 @@ This design avoids mixing signals and instead **commits to the “best” channe
 - Explore **hybrid channel weighting** instead of hard switching  
 - Use **ML based speaker separation model** and run directly on Mentis
 
----
-
-## Demo
-🎥 Short video showing:  
-- User looks left / right → audio routes to left mic  
-- Hands can be used to overwrite the head pose
-see [here](https://www.youtube.com/watch?v=stDaze9vgrw)
-📓 System description video see [here](https://www.youtube.com/watch?v=Pk42RZy6LF8)
