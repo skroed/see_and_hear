@@ -3,18 +3,29 @@ from axelera.app.stream import create_inference_stream
 
 SIDE_THS = 100
 
+
 def run_vision_inference(shared_state):
-    stream = create_inference_stream(
-        network="yolov8spose-coco",
-        sources=["usb:20"]
-    )
+    stream = create_inference_stream(network="yolov8spose-coco", sources=["usb:20"])
 
     def vision_loop(window, stream):
         window.options(0, title="Show the pose")
-        my_text = window.text(('60%', '10%'), "Detecting...", color=(255, 0, 0, 0), font_size=36)
+        my_text = window.text(
+            ("50%", "10%"), "Detecting...", color=(255, 255, 255, 1), font_size=52
+        )
 
         for frame_result in stream:
-            pose = frame_result.meta['yolov8spose-coco']
+
+            pose = frame_result.meta["yolov8spose-coco"]
+
+            # If no pose detected, skip the frame
+            if len(pose.keypoints) == 0:
+                my_text["text"] = "No person detected"
+                shared_state.set_direction("unknown")
+                window.show(
+                    frame_result.image, frame_result.meta, frame_result.stream_id
+                )
+                continue
+
             keypoints = pose.keypoints[0, ...]
 
             nose = keypoints[0]
@@ -43,11 +54,13 @@ def run_vision_inference(shared_state):
                 overwrite = True
 
             shared_state.set_direction(look_direction)
-            my_text["text"] = f"Look direction: {look_direction}, overwrite: {overwrite}"
+            my_text["text"] = (
+                f"Look direction: {look_direction}, overwrite: {overwrite}"
+            )
             window.show(frame_result.image, frame_result.meta, frame_result.stream_id)
 
     with display.App(visible=True) as app:
-        wnd = app.create_window("Pose View", (900, 600))
-        app.start_thread(vision_loop, (wnd, stream), name='VisionThread')
+        wnd = app.create_window("Pose View", (800, 600))
+        app.start_thread(vision_loop, (wnd, stream), name="VisionThread")
         app.run()
     stream.stop()

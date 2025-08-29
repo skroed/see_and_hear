@@ -1,5 +1,6 @@
 import threading
 
+
 class SharedLookDirection:
     def __init__(self):
         self._direction = "center"
