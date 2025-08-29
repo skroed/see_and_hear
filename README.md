@@ -14,6 +14,8 @@ Applications include:
 
 ## System Architecture
 
+<img width="4311" height="2480" alt="SeeAndHearFinal" src="https://github.com/user-attachments/assets/9e2484fe-5ef5-4b16-9395-471ac92f49ed" />
+
 ### Voyager SDK
 In order to run the given scripts you need to install a virtual environment with the newest version of Voyager SDK from the [axelera repo](https://github.com/axelera-ai-hub/voyager-sdk).
 
@@ -81,3 +83,5 @@ This design avoids mixing signals and instead **commits to the “best” channe
 🎥 Short video showing:  
 - User looks left / right → audio routes to left mic  
 - Hands can be used to overwrite the head pose
+see [here](https://www.youtube.com/watch?v=stDaze9vgrw)
+📓 System description video see [here](https://www.youtube.com/watch?v=Pk42RZy6LF8)
